@@ -1,0 +1,5 @@
+POST /test/path?num=2 HTTP/1.0
+Host: localhost:8888
+Content-Length: 6 
+
+test=1

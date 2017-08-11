@@ -1,0 +1,62 @@
+Author name:  ___Yimeng Xu______
+*******************************************************************
+An Http Application Server implements Java Servlet 2.4 Specification. It is an Http Server (servlet container) built on top of my own thread pool, blocking queue, which handles incoming request to corresponding servlets.
+
+*******************************************************************
+instructions for building and running your solution?
+  (include detailed instructions, or write 'None')
+  	1. To run HttpServer, has to Specify three arguments: port number and root directory and path to web.xml
+  	   Testing files is stored in "/HW1/files" directory 
+           Testing web.xml directory is in “/HW1/conf” directory
+  	   **suggested input argument: 8888 /...your directory path.../HW1/files
+                                        /… path to ../HW1/conf/web.xml
+  	 
+    2. Testing HTTP/1.1 functions:
+     	a. require the Host: header from HTTP 1.1 clients
+     	   when test HTTP/1.1 request, must specify host header or a 400 error will response
+     	   ** Eg:telnet localhost 8888
+				 GET /test.txt HTTP/1.1
+				 HOST:localhost:8888
+    	b. accept absolute URL's in a request
+    	   ** Eg:telnet localhost 8888
+    	   		 GET http://localhost:8888/test.txt HTTP/1.1
+				 HOST:localhost:8888
+		c. use the "100 Continue" response appropriately
+			When server receives the first line of an HTTP 1.1 (or later) request
+			it will respond with either "100 Continue"
+		d. include the Date: header in each response
+		e. handle requests with If-Modified-Since: or If-Unmodified-Since: headers
+		f. Supporting the GET and HEAD methods
+			** Eg:telnet localhost 8888
+    	   		 HEAD /test.txt HTTP/1.1
+				 HOST:localhost:8888
+			Note:If the method is not GET or HEAD or POST(later use) a 501 error will produce
+		g. Supporting HTTP 1.0 Requests
+		    ** Eg:GET /test.txt HTTP/1.0
+	3.Test Directory request and request with MIME files
+		In your Chrome or FireFox browser, by input localhost:8888/ the content of root directory will be listed
+		By clicking the list of files/sub directory the file will be shown in the browser page
+	4.Test special URLs
+		a. Use GET /control HTTP/1.0 in Telnet or localhost:8888/control in browser can get to the control panel
+		b. Use GET /shutdown HTTP/1.0 in Telnet or localhost:8888/shutdown in browser can shutdown server
+	5.Stress test the server with Apachebench
+		use: ab -n 3000 -c 1000 http://localhost:8888/test.txt
+		current thread number is 30, blocking queue size is 1000. 
+		defined as final variable in HTTPServer,could modify there
+
+MileStone 2:
+  3. Testing servlet container function:
+    There are 3 Unit test included in the test folder could use them to test FakeSession/FakeResponse/FakeRequest
+   Use servlet to 
+Did you personally write _all_ the code you are submitting
+(other than code from the course web page)?
+  [*] Yes
+  [ ] No
+
+Did you copy any code from the Internet, or from classmates?
+  [ ] Yes
+  [*] No
+
+Did you collaborate with anyone on this assignment?
+  [ ] Yes
+  [*] No
